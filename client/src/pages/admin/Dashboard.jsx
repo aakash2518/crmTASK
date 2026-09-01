@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, Package, ShieldCheck, Activity, Plus } from 'lucide-react';
+import { Users, Package, ShieldCheck, Activity, Plus, Settings } from 'lucide-react';
 import api from '../../services/api';
 
-const StatCard = ({ title, value, icon: Icon, description, colorClass }) => (
+const StatCard = ({ title, value, icon: Icon, description, color, bgRgba, glowRgba }) => (
   <div className="card" style={{ transition: 'transform var(--transition-fast)' }} 
        onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
        onMouseLeave={(e) => e.currentTarget.style.transform = 'none'}>
@@ -11,13 +11,19 @@ const StatCard = ({ title, value, icon: Icon, description, colorClass }) => (
       <div className="flex items-center justify-between mb-4">
         <div>
           <p className="text-muted" style={{ fontSize: 'var(--font-size-sm)', fontWeight: '500' }}>{title}</p>
-          <h3 style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.25rem' }}>{value}</h3>
+          <h3 style={{ fontSize: '2.5rem', fontWeight: '700', marginTop: '0.25rem', lineHeight: '1' }}>{value}</h3>
         </div>
-        <div className={colorClass} style={{ padding: '0.75rem', borderRadius: 'var(--radius-lg)', backgroundColor: 'var(--color-secondary)' }}>
-          <Icon size={24} />
+        <div style={{ 
+          padding: '1rem', 
+          borderRadius: 'var(--radius-lg)', 
+          backgroundColor: bgRgba,
+          color: color,
+          boxShadow: `0 0 20px ${glowRgba}`
+        }}>
+          <Icon size={28} />
         </div>
       </div>
-      <p className="text-muted" style={{ fontSize: '0.75rem' }}>{description}</p>
+      <p className="text-muted" style={{ fontSize: '0.8rem' }}>{description}</p>
     </div>
   </div>
 );
@@ -109,28 +115,36 @@ const Dashboard = () => {
           value={stats.totalManagers} 
           icon={Users} 
           description="Total active managers"
-          colorClass="text-primary"
+          color="#3b82f6"
+          bgRgba="rgba(59, 130, 246, 0.15)"
+          glowRgba="rgba(59, 130, 246, 0.3)"
         />
         <StatCard 
           title="Total Modules" 
           value={stats.totalModules} 
           icon={Package} 
           description="Available CRM modules"
-          colorClass="text-success"
+          color="#10b981"
+          bgRgba="rgba(16, 185, 129, 0.15)"
+          glowRgba="rgba(16, 185, 129, 0.3)"
         />
         <StatCard 
           title="Active Managers" 
           value={stats.activeManagers} 
           icon={Activity} 
           description="Managers with active status"
-          colorClass="text-warning"
+          color="#06b6d4"
+          bgRgba="rgba(6, 182, 212, 0.15)"
+          glowRgba="rgba(6, 182, 212, 0.3)"
         />
         <StatCard 
           title="Permissions assigned" 
           value={stats.permissionAssignments} 
           icon={ShieldCheck} 
-          description="Total module accesses granted"
-          colorClass="text-danger"
+          description="Total module access granted"
+          color="#ef4444"
+          bgRgba="rgba(239, 68, 68, 0.15)"
+          glowRgba="rgba(239, 68, 68, 0.3)"
         />
       </div>
 
@@ -175,18 +189,18 @@ const Dashboard = () => {
             <h3 className="card-title">Quick Actions</h3>
           </div>
           <div className="card-body">
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <Link to="/admin/managers" className="btn btn-secondary justify-between w-full">
-                <span>Manage Users</span>
-                <Users size={16} />
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+              <Link to="/admin/managers" className="btn btn-secondary" style={{ flexDirection: 'column', height: '120px', gap: '0.75rem', backgroundColor: 'transparent', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)' }}>
+                <Users size={32} />
+                <span style={{ fontSize: '0.9rem' }}>Manage Users</span>
               </Link>
-              <Link to="/admin/modules" className="btn btn-secondary justify-between w-full">
-                <span>Configure Modules</span>
-                <Package size={16} />
+              <Link to="/admin/modules" className="btn btn-secondary" style={{ flexDirection: 'column', height: '120px', gap: '0.75rem', backgroundColor: 'transparent', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)' }}>
+                <Settings size={32} />
+                <span style={{ fontSize: '0.9rem' }}>Configure Modules</span>
               </Link>
-              <Link to="/admin/permissions" className="btn btn-secondary justify-between w-full">
-                <span>Assign Permissions</span>
-                <ShieldCheck size={16} />
+              <Link to="/admin/permissions" className="btn btn-secondary" style={{ flexDirection: 'column', height: '120px', gap: '0.75rem', backgroundColor: 'transparent', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)' }}>
+                <ShieldCheck size={32} />
+                <span style={{ fontSize: '0.9rem' }}>Assign Permissions</span>
               </Link>
             </div>
           </div>

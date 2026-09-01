@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "client",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^1.20.0",
+    "crm-task-root": "file:..",
     "lucide-react": "^1.38.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

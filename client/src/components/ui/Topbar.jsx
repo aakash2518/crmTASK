@@ -25,7 +25,7 @@ const Topbar = ({ toggleSidebar }) => {
         <div className="profile-menu">
           <div className="profile-info hidden-mobile">
             <span className="profile-name">{user?.name || 'Admin User'}</span>
-            <span className="badge badge-primary">{user?.role || 'ADMIN'}</span>
+            <span className="profile-role">{(user?.role || 'ADMIN').toUpperCase()}</span>
           </div>
           <div className="avatar">
             <User size={20} />

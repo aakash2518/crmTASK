@@ -1,13 +1,13 @@
 # Architecture: MERN Role-Based Modular CRM
 
 ## 1. Monorepo/Project Structure
-We will use a monorepo approach with separate directories for `frontend` and `backend` to keep the codebase unified but decoupled in deployment.
+We will use a monorepo approach with separate directories for `client` and `server` to keep the codebase unified but decoupled in deployment.
 
 ```text
 /
-├── backend/
+├── server/
 │   ├── src/
-│   │   ├── config/       # Environment, Database configs
+│   │   ├── config/       (Database connection, env setup)
 │   │   ├── controllers/  # Route handlers
 │   │   ├── middlewares/  # Auth, Error handling, RBAC
 │   │   ├── models/       # Mongoose schemas
@@ -17,10 +17,10 @@ We will use a monorepo approach with separate directories for `frontend` and `ba
 │   │   └── index.js      # Entry point
 │   ├── package.json
 │   └── .env.example
-├── frontend/
+├── client/
 │   ├── src/
-│   │   ├── assets/       # Images, global styles
-│   │   ├── components/   # Reusable UI components
+│   │   ├── assets/       (Images, fonts)
+│   │   ├── components/   (Reusable UI elements)
 │   │   ├── contexts/     # React context (Auth)
 │   │   ├── hooks/        # Custom hooks
 │   │   ├── layouts/      # Dashboard layouts (Admin vs Manager)
@@ -35,14 +35,14 @@ We will use a monorepo approach with separate directories for `frontend` and `ba
 └── README.md
 ```
 
-## 2. Frontend Architecture
+## 2. Client Architecture
 - **Framework**: React (Vite for fast build and optimal developer experience).
 - **State Management**: React Context API for Auth and global state (e.g., active modules). Local state for component-specific data.
 - **Routing**: React Router DOM v6.
 - **Styling**: Vanilla CSS utilizing CSS variables (custom properties) to establish a design system for a premium SaaS dashboard aesthetic without external utility libraries, ensuring total flexibility.
 - **API Client**: Fetch API or Axios with interceptors for attaching JWT tokens and handling 401/403 errors globally.
 
-## 3. Backend Architecture
+## 3. Server Architecture
 - **Framework**: Express.js on Node.js.
 - **Design Pattern**: MVC-like architecture (Routes -> Controllers -> Services -> Models) ensuring a clear separation of concerns.
 - **Database**: MongoDB with Mongoose ODM.
@@ -152,7 +152,7 @@ Schemas will represent Users (Admins, Managers) and Modules. A generic schema wi
 
 ## 12. Environment Variables
 
-### Backend (`.env`)
+### Server (`.env`)
 ```env
 PORT=5000
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/crm?retryWrites=true&w=majority
@@ -161,7 +161,7 @@ JWT_EXPIRES_IN=1d
 NODE_ENV=development
 ```
 
-### Frontend (`.env`)
+### Client (`.env`)
 ```env
 VITE_API_URL=http://localhost:5000/api
 ```
