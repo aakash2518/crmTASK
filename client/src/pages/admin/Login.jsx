@@ -100,12 +100,20 @@ const Login = () => {
         padding: '2rem'
       }}>
         <div style={{ width: '100%', maxWidth: '400px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-             <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#2563eb', marginBottom: '0.5rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+             <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#2563eb', marginBottom: '1.5rem' }}>
               iCRM<span style={{ color: '#f59e0b' }}>.</span>
             </h1>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--color-text-main)' }}>Admin Sign In</h2>
-            <p className="text-muted mt-2" style={{ fontSize: '0.9rem' }}>Sign in to manage the CRM system</p>
+            
+            {/* Role Switcher Tabs */}
+            <div style={{ display: 'flex', backgroundColor: '#f8fafc', padding: '6px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)' }}>
+              <Link to="/admin/login" style={{ flex: 1, textAlign: 'center', padding: '0.625rem', borderRadius: 'var(--radius-md)', textDecoration: 'none', fontWeight: 600, color: '#fff', backgroundColor: '#2563eb', boxShadow: '0 2px 4px rgba(37,99,235,0.2)', transition: 'all 0.2s' }}>
+                Admin
+              </Link>
+              <Link to="/manager/login" style={{ flex: 1, textAlign: 'center', padding: '0.625rem', borderRadius: 'var(--radius-md)', textDecoration: 'none', fontWeight: 600, color: 'var(--color-text-muted)', backgroundColor: 'transparent', transition: 'all 0.2s' }}>
+                Manager
+              </Link>
+            </div>
           </div>
           
           {error && (
@@ -161,12 +169,6 @@ const Login = () => {
               {isLoading ? 'Signing in...' : 'Sign In as Admin'}
             </button>
           </form>
-
-          <div className="mt-8 text-center">
-            <p className="text-muted" style={{ fontSize: '0.875rem' }}>
-              Are you a Manager? <a href="/manager/login" style={{ color: '#2563eb', fontWeight: 600, textDecoration: 'none' }}>Log in here</a>
-            </p>
-          </div>
         </div>
       </div>
     </div>
